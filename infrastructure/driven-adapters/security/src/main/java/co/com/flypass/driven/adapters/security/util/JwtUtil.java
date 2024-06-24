@@ -4,7 +4,9 @@ import com.nimbusds.jose.JOSEException;
 import com.nimbusds.jose.JWSAlgorithm;
 import com.nimbusds.jose.JWSHeader;
 import com.nimbusds.jose.JWSSigner;
+import com.nimbusds.jose.JWSVerifier;
 import com.nimbusds.jose.crypto.RSASSASigner;
+import com.nimbusds.jose.crypto.RSASSAVerifier;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.gen.RSAKeyGenerator;
 import com.nimbusds.jwt.JWTClaimsSet;
@@ -24,7 +26,7 @@ public class JwtUtil {
 
   private RSAKey generateRsa() throws JOSEException {
     return new RSAKeyGenerator(2048)
-        .keyID("123")
+        .keyID("flypass")
         .generate();
   }
 
@@ -49,9 +51,9 @@ public class JwtUtil {
   }
 
   public String extractUsername(String token) throws JOSEException, ParseException {
-    var signedJWT = SignedJWT.parse(token);
-    JWSSigner signer = new RSASSASigner(rsaJWK);
-    signedJWT.sign(signer);
+    JWSVerifier verifier = new RSASSAVerifier(rsaJWK.toPublicJWK());
+    SignedJWT signedJWT = SignedJWT.parse(token);
+    assert signedJWT.verify(verifier);
 
     return signedJWT.getJWTClaimsSet().getSubject();
   }
