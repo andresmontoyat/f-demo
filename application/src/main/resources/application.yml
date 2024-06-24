@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: ${MS_NAME:ms-manager-register}
+  datasource:
+    driver-class-name: ${DB_DRIVER_CLASS:org.postgresql.Driver}
+    url: ${DATABASE_URL:jdbc:postgresql://postgres:5432/vitxo}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+    type: com.zaxxer.hikari.HikariDataSource
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          lob:
+            non_contextual_creation: true
+    generate-ddl: ${DATABASE_JPA_GENERATE_DDL:true}
+    hibernate:
+      ddl-auto: ${JPA_DDL_AUTO:update}
+    show-sql: ${JPA_SHOW_SQL:true}
+server:
+  port: ${SERVER_PORT:8080}
+  servlet:
+    context-path: ${SERVLET_CONTEXT_PATH:/}
+
+debug: ${DEBUG:false}
+
+logging:
+  level:
+    org.springframework: error
+    com.soldife: trace
+
+recaptcha:
+  assessment-url: ${RECAPTCHA_ASSESSMENT_URL:https://recapthca.google.com}
+  site-key: ${RECAPTCHA_SITE_KEY:google-site-key}
+  api-key: ${RECAPTCHA_API_KEY:google-api-key}
+  enabled: ${RECAPTCHA_ENABLED:false}
+
