@@ -1,4 +1,4 @@
-package co.com.flypass.usecase;
+package co.com.flypass.usecase.customer;
 
 import co.com.flypass.domain.Customer;
 import co.com.flypass.exception.ConflictException;

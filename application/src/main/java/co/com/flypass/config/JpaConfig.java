@@ -12,6 +12,6 @@ public class JpaConfig {
 
   @Bean
   public AuditorAware<String> auditorProvider() {
-    return () -> Optional.of("vitxo");
+    return () -> Optional.of("flypass");
   }
 }
