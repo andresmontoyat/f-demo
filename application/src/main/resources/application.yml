@@ -3,9 +3,9 @@ spring:
     name: ${MS_NAME:ms-manager-register}
   datasource:
     driver-class-name: ${DB_DRIVER_CLASS:org.postgresql.Driver}
-    url: ${DATABASE_URL:jdbc:postgresql://postgres:5432/vitxo}
-    username: ${DATABASE_USERNAME}
-    password: ${DATABASE_PASSWORD}
+    url: ${DATABASE_URL:jdbc:postgresql://postgres:5432/flypass}
+    username: ${DATABASE_USERNAME:flypass}
+    password: ${DATABASE_PASSWORD:flypass}
     type: com.zaxxer.hikari.HikariDataSource
   jpa:
     properties:
@@ -27,12 +27,5 @@ debug: ${DEBUG:false}
 
 logging:
   level:
-    org.springframework: error
-    com.soldife: trace
-
-recaptcha:
-  assessment-url: ${RECAPTCHA_ASSESSMENT_URL:https://recapthca.google.com}
-  site-key: ${RECAPTCHA_SITE_KEY:google-site-key}
-  api-key: ${RECAPTCHA_API_KEY:google-api-key}
-  enabled: ${RECAPTCHA_ENABLED:false}
-
+    org.springframework: info
+    co.com.flypass: info

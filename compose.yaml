@@ -1,1 +1,14 @@
 services:
+  postgres:
+    image: 'postgres:13'
+    container_name: postgres
+    environment:
+      - 'POSTGRES_DB=flypass'
+      - 'POSTGRES_PASSWORD=flypass'
+      - 'POSTGRES_USER=flypass'
+    ports:
+      - '5432:5432'
+    volumes:
+      - flypass_db_data:/var/lib/postgresql/data
+volumes:
+  flypass_db_data:
