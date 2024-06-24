@@ -68,4 +68,15 @@ public class ProductAdapterRepository implements ProductRepository {
     productJpaRepository.deleteById(id);
     log.info("[END] - delete product by number {}", id);
   }
+
+  @Override
+  public List<Product> findByCustomer(UUID customerId) {
+    log.info("[START] - find all products by customer");
+    var result = productJpaRepository.findAllByCustomer_Id(customerId)
+        .stream()
+        .map(mapper::toDomain)
+        .toList();
+    log.info("[END] - find all products by customer");
+    return result;
+  }
 }

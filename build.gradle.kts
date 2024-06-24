@@ -2,10 +2,9 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.*
 
 plugins {
     java
+    application
     id("org.springframework.boot") version "3.3.1"
     id("io.spring.dependency-management") version "1.1.5"
-    id("org.hibernate.orm") version "6.5.2.Final"
-    id("org.graalvm.buildtools.native") version "0.10.2"
     id("jacoco")
 }
 
@@ -13,9 +12,8 @@ group = "co.com.flypass"
 version = "0.0.1-SNAPSHOT"
 
 java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(22)
-    }
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
 }
 
 configurations {
@@ -39,6 +37,7 @@ subprojects {
     apply(plugin = "io.spring.dependency-management")
     apply(plugin = "java")
     apply(plugin = "jacoco")
+    apply(plugin = "application")
 
     dependencies {
         implementation("org.slf4j:slf4j-api")
@@ -68,12 +67,12 @@ subprojects {
         }
     }
 
-
     tasks.withType<Test> {
         useJUnitPlatform()
         testLogging {
             events = setOf(PASSED, SKIPPED, FAILED)
         }
+
         finalizedBy(tasks.jacocoTestReport)
     }
 
@@ -108,9 +107,11 @@ tasks.register<JacocoReport>("jacocoMergedReport") {
     }
 }
 
-hibernate {
-    enhancement {
-        enableAssociationManagement = true
-    }
+tasks.getByName<Jar>("bootJar") {
+    enabled = false
+}
+
+tasks.getByName<Jar>("jar") {
+    enabled = false
 }
 

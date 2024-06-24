@@ -27,5 +27,9 @@ debug: ${DEBUG:false}
 
 logging:
   level:
-    org.springframework: info
-    co.com.flypass: info
+    org.springframework: trace
+    co.com.flypass: trace
+
+jwt:
+  secret: "#r[gRsz24a?O{%?ndVJ>56#m^j;6:3%uqK77:xFsw6b7O)(fyiIbPkpM)p1LX$L"
+  expiration: 60

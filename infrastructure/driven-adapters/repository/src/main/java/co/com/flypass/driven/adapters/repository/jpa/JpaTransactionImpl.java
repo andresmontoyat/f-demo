@@ -23,7 +23,7 @@ public class JpaTransactionImpl<R> implements Transaction<R> {
       return result;
     } catch (Exception e) {
       log.error("An error has occurred trying to execute transaction", e);
-      throw new TransactionException("Transaction Error", e);
+      throw new TransactionException(e.getMessage(), e);
     }
   }
 }

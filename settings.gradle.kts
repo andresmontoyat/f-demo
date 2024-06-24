@@ -11,3 +11,6 @@ project(":rest-api").projectDir = file("./infrastructure/entry-points/rest-api")
 
 include(":repository")
 project(":repository").projectDir = file("./infrastructure/driven-adapters/repository")
+
+include(":security")
+project(":security").projectDir = file("./infrastructure/driven-adapters/security")

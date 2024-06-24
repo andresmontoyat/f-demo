@@ -10,6 +10,7 @@ import co.com.flypass.usecase.product.DeleteProductUseCase;
 import co.com.flypass.usecase.product.GetProductUseCase;
 import co.com.flypass.usecase.product.ReadAllProductUseCase;
 import java.math.BigInteger;
+import java.net.URI;
 import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -54,7 +55,7 @@ public class ProductController {
   @PostMapping
   public ResponseEntity<ProductResponse> create(@Validated @RequestBody AddProductRequest request) {
     var customer = addProductUseCase.execute(mapper.resolveProduct(request));
-    return ResponseEntity.ok(mapper.toProductResponse(customer));
+    return ResponseEntity.created(URI.create(String.format("/%s", customer.getId()))).body(mapper.toProductResponse(customer));
   }
 
   @PatchMapping("/{product}/status/{status}")

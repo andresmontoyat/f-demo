@@ -15,6 +15,8 @@ import org.springframework.context.annotation.FilterType;
         @ComponentScan.Filter(type = FilterType.REGEX, pattern = ".*[UseCase]")}, useDefaultFilters = false)
 public class UseCaseConfig {
 
+
+
   @Bean(name = "consecutives")
   public Map<ProductType, BigInteger> consecutives() {
     return Map.of(ProductType.CHECKING, BigInteger.valueOf(3300000000L),

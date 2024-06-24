@@ -17,4 +17,6 @@ public interface ProductRepository {
   void update( Product product);
 
   void delete(UUID id);
+
+  List<Product> findByCustomer(UUID customerId);
 }
