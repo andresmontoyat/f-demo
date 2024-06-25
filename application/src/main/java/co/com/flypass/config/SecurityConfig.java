@@ -43,11 +43,19 @@ public class SecurityConfig {
     http
         .csrf((csrf) -> csrf
             .ignoringRequestMatchers("/api/v1/*")
+            .ignoringRequestMatchers("/swagger-ui/*")
+            .ignoringRequestMatchers("/v3/api-docs/*")
+            .ignoringRequestMatchers("/swagger-ui.html")
         )
         .cors(Customizer.withDefaults())
         .authorizeHttpRequests((authorize) -> authorize
             .dispatcherTypeMatchers(DispatcherType.FORWARD, DispatcherType.ERROR).permitAll()
             .requestMatchers("/api/v1/login").permitAll()
+            .requestMatchers("/actuator").permitAll()
+            .requestMatchers("/v3/api-docs/**").permitAll()
+            .requestMatchers("/swagger-ui/**").permitAll()
+            .requestMatchers("/swagger-ui.html").permitAll()
+            .requestMatchers("/webjars/**").permitAll()
             .anyRequest().authenticated()
         )
         .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
