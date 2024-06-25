@@ -3,6 +3,7 @@ package co.com.flypass.rest.api.controller.product.response;
 import co.com.flypass.domain.enums.ProductStatus;
 import co.com.flypass.domain.enums.ProductType;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
@@ -24,7 +25,7 @@ public class ProductResponse {
 
   private ProductStatus status;
 
-  private String number;
+  private BigInteger number;
 
   private boolean gmf;
 

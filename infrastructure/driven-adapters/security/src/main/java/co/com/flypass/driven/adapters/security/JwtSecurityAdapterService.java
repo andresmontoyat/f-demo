@@ -19,11 +19,11 @@ public class JwtSecurityAdapterService implements LoginService {
 
   @Override
   public String login(String username, String password) {
-    try{
-      var authentication = authenticationManager.authenticate(
+    try {
+      authenticationManager.authenticate(
           new UsernamePasswordAuthenticationToken(username, password));
       return jwtUtil.generateToken(username);
-    }catch (Exception e) {
+    } catch (Exception e) {
       throw new IllegalStateException("Authentication failed");
     }
   }

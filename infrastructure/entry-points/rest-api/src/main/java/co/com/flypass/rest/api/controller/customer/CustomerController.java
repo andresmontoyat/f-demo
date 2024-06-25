@@ -11,6 +11,7 @@ import co.com.flypass.usecase.customer.DeleteCustomerUseCase;
 import co.com.flypass.usecase.customer.GetCustomerUseCase;
 import co.com.flypass.usecase.customer.ReadAllCustomerUseCase;
 import co.com.flypass.usecase.customer.UpdateCustomerUseCase;
+import java.net.URI;
 import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -47,9 +48,11 @@ public class CustomerController {
   }
 
   @PostMapping
-  public ResponseEntity<AddCustomerResponse> create(@Validated @RequestBody AddCustomerRequest addCustomerRequest) {
+  public ResponseEntity<AddCustomerResponse> create(
+      @Validated @RequestBody AddCustomerRequest addCustomerRequest) {
     var customer = addCustomerUseCase.execute(mapper.toCustomer(addCustomerRequest));
-    return ResponseEntity.ok(mapper.toAddCustomerResponse(customer));
+    return ResponseEntity.created(URI.create(String.format("/%s", customer.getId())))
+        .body(mapper.toAddCustomerResponse(customer));
   }
 
   @GetMapping
@@ -59,17 +62,20 @@ public class CustomerController {
   }
 
   @GetMapping("/{documentType}/{document}")
-  public ResponseEntity<CustomerResponse> findByDocument(@PathVariable("documentType") DocumentType documentType,
+  public ResponseEntity<CustomerResponse> findByDocument(
+      @PathVariable("documentType") DocumentType documentType,
       @PathVariable("document") String document) {
     var result = getCustomerUseCase.execute(documentType, document);
     return ResponseEntity.ok(mapper.toCustomerResponse(result));
   }
 
   @PutMapping("/{documentType}/{document}")
-  public ResponseEntity<CustomerResponse> update(@PathVariable("documentType") DocumentType documentType,
+  public ResponseEntity<CustomerResponse> update(
+      @PathVariable("documentType") DocumentType documentType,
       @PathVariable("document") String document,
       @Validated @RequestBody UpdateCustomerRequest updateCustomerRequest) {
-    var customer = updateCustomerUseCase.execute(documentType, document, mapper.toCustomer(updateCustomerRequest));
+    var customer = updateCustomerUseCase.execute(documentType, document,
+        mapper.toCustomer(updateCustomerRequest));
     return ResponseEntity.ok(mapper.toCustomerResponse(customer));
   }
 

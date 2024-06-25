@@ -24,12 +24,6 @@ public class JwtUtil {
     this.rsaJWK = rsaJWK;
   }
 
-  private RSAKey generateRsa() throws JOSEException {
-    return new RSAKeyGenerator(2048)
-        .keyID("flypass")
-        .generate();
-  }
-
   public String generateToken(String username) throws JOSEException {
     var now = new Date();
     var expirationDate = new Date(now.getTime() + 60 * 1000);
