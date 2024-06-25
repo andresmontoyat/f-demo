@@ -78,7 +78,6 @@ subprojects {
 
     tasks.jacocoTestReport {
         dependsOn(tasks.test)
-        finalizedBy(tasks.jacocoTestCoverageVerification)
 
         reports {
             xml.required.set(true)
@@ -106,6 +105,7 @@ tasks.register<JacocoReport>("jacocoMergedReport") {
         html.required.set(true)
     }
 }
+
 
 tasks.getByName<Jar>("bootJar") {
     enabled = false

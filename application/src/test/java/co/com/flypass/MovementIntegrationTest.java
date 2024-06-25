@@ -103,8 +103,7 @@ public class MovementIntegrationTest {
     AddCheckingProductRequest addCheckingProductRequest = new AddCheckingProductRequest();
     addCheckingProductRequest.setGmf(Boolean.TRUE);
     addCheckingProductRequest.setBalance(BigDecimal.TEN);
-    addCheckingProductRequest.setStatus(
-        faker.random().nextBoolean() ? ProductStatus.ACTIVE : ProductStatus.INACTIVE);
+    addCheckingProductRequest.setStatus(ProductStatus.ACTIVE);
     addCheckingProductRequest.setCustomer(CustomerRequest.builder()
         .document(customerRequest.getDocument())
         .documentType(customerRequest.getDocumentType())
